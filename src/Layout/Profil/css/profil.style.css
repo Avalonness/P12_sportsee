@@ -1,0 +1,17 @@
+.acceuil_main-container{
+    padding: 60px 100px;
+}
+
+.acceuil_hello{
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.acceuil_hello span{
+    color: red;
+}
+
+.acceuil_message{
+    font-size: 18px;
+    margin-top: 20px;
+}

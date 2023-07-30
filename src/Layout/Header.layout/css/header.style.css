@@ -1,0 +1,25 @@
+.header_main-container {
+    background: #020203;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.header_logo {
+    flex: 25%;
+}
+.header_logo img {
+    height: 60px;
+}
+
+.header_menu {
+    flex: 100%;
+    font-size: 24px;
+    padding: 0 25px;
+}
+
+.header_menu ul {
+    display: flex;
+    justify-content: space-between;
+}

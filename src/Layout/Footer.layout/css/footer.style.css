@@ -1,0 +1,17 @@
+.footer_main-container{
+    height: 89.4vh;
+    background: #020203;
+    width: 100%;
+    color: white;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footer_copyright {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
