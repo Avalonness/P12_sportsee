@@ -15,3 +15,13 @@
     font-size: 18px;
     margin-top: 20px;
 }
+
+.acceuil_bottom_content {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+
+.activite_secondary{
+    display: flex;
+}

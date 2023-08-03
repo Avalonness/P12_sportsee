@@ -53,7 +53,7 @@ function NutritionCardComp({ user }) {
               <img src={getIcon(key)} alt="icone de navigation pour footer" />
             </div>
             <div className="nutrition_content__right">
-                <p>{formatValue(key, user.keyData[key])}</p>
+                <p className='nutrition_value'>{formatValue(key, user.keyData[key])}</p>
                 <p>{getDisplayName(key)}</p>
             </div>
         </div>

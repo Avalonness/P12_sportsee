@@ -4,6 +4,10 @@ import UserModel from '../../Shares/models/UserModel';
 import "./css/profil.style.css"
 import NutritionCardComp from '../../Composant/nutritionCard/nutritionCard.component';
 import UserActivity from '../../Composant/userActivity/userActivity.component';
+import AverageSession from '../../Composant/averageSession/averageSession.component';
+import UserPerformance from '../../Composant/performance/performance.component';
+
+
 import fetchUserData from '../../Shares/services/userService'; 
 import getMockUserDataById from "../../Shares/services/mockUserService"
 
@@ -32,8 +36,6 @@ function ProfilLayout() {
 
     fetchData();
   }, [id]);
-
-  console.log(user)
   
   if (!user) {
     // Afficher un message de chargement ici tant que les données ne sont pas disponibles
@@ -50,6 +52,10 @@ function ProfilLayout() {
       <div className='acceuil_bottom_content'> 
         <div className='acceuil_bottom_activite'>
         <UserActivity userId={id} />
+        <div className='activite_secondary'>
+          <AverageSession userId={id}/>
+          <UserPerformance userId={id} />
+        </div>
         </div>
 
         <div className='acceuil_bottom_nutrition'>
