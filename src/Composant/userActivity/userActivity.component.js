@@ -71,11 +71,11 @@ function UserActivity({ userId }) {
     <div>
     <h2 className="graph_titre">Activité quotidienne</h2>
       {minWeight !== null && maxWeight !== null && (
-        <BarChart width={800} height={250} data={userActivity}>
+        <BarChart width={800} height={200} data={userActivity}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
           <YAxis yAxisId="left" hide />
-          <YAxis yAxisId="right" label={{ value: 'Poids (kg)', angle: -90, position: 'insideLeft' }} domain={[minWeight - 1, maxWeight + 1]} />
+          <YAxis yAxisId="right" orientation="right" label={{ value: '', angle: -90, position: 'insideRight' }} domain={[minWeight - 1, maxWeight + 1]} />
           <Tooltip />
           <Legend align="right" verticalAlign="top" height={36} iconType="square" />
           <Bar yAxisId="right" dataKey="kilogram" name="Poids (kg)" fill="#282D30" />

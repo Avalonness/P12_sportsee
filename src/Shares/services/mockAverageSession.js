@@ -11,13 +11,17 @@ const fetchUserAverageSessions = async (userId) => {
   } catch (error) {
     console.error("Erreur lors de la récupération des données", error);
     const mockData = getUserAverageSessionsFromMock(userId);
+    console.log('MockData:', mockData);  // Ajouter cette ligne
     return mockData;
   }
 };
 
 const getUserAverageSessionsFromMock = (userId) => {
-  const mockData = USER_AVERAGE_SESSIONS.find((data) => data.userId === userId);
-  return mockData ? mockData.sessions : [];
+  const numericUserId = Number(userId);
+  const mockData = USER_AVERAGE_SESSIONS.find((data) => data.userId === numericUserId);
+  console.log('UserID:', numericUserId);
+  console.log('MockData:', mockData);
+  return mockData ? { data: { sessions: mockData.sessions } } : { data: { sessions: [] } };
 };
 
 export default fetchUserAverageSessions;

@@ -11,6 +11,7 @@ function AverageSession({ userId }) {
     const [averageSessions, setAverageSessions] = useState([]);
 
     useEffect(() => {
+        console.log('UserID:', userId);
         fetchUserAverageSessions(userId)
           .then((data) => {
             // Vérifiez que data.data.sessions existe avant de le traiter
@@ -63,7 +64,7 @@ function AverageSession({ userId }) {
       return (
         <div className='graph_average__container'>
             <LineChart width={200} height={200} data={averageSessions} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <XAxis dataKey="day" tick={{ fill: '#FFFFFF' }} />
+                <XAxis dataKey="day" tick={{ fill: '#FFFFFF' }} axisLine={false} />
                 <YAxis hide/>
                 <Tooltip content={<CustomTooltip />} />
                 <Legend align="center" verticalAlign="top" height={36} />

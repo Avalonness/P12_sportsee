@@ -1,6 +1,10 @@
 .graph_perf__container{
     background: #282D30;
-    width: 40%;
+    width: 35%;
+    height: 200px;
     margin-left: 25px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin-right: 25px;
 }

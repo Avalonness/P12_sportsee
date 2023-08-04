@@ -6,6 +6,7 @@ import NutritionCardComp from '../../Composant/nutritionCard/nutritionCard.compo
 import UserActivity from '../../Composant/userActivity/userActivity.component';
 import AverageSession from '../../Composant/averageSession/averageSession.component';
 import UserPerformance from '../../Composant/performance/performance.component';
+import ScoreComponent from '../../Composant/score/score.component';
 
 
 import fetchUserData from '../../Shares/services/userService'; 
@@ -24,7 +25,7 @@ function ProfilLayout() {
           userData.userInfos.firstName,
           userData.userInfos.lastName,
           userData.userInfos.age,
-          userData.todayScore,
+          userData.todayScore || userData.score,
           userData.keyData
         ));
       } else {
@@ -41,6 +42,7 @@ function ProfilLayout() {
     // Afficher un message de chargement ici tant que les données ne sont pas disponibles
     return <div>Loading...</div>;
   }
+ 
   return (
     <div className="acceuil_main-container">
 
@@ -55,6 +57,7 @@ function ProfilLayout() {
         <div className='activite_secondary'>
           <AverageSession userId={id}/>
           <UserPerformance userId={id} />
+          <ScoreComponent score={user.todayScore} />
         </div>
         </div>
 
