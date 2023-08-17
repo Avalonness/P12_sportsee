@@ -68,7 +68,7 @@ function UserActivity({ userId }) {
   }
 
   return (
-    <div>
+    <div className="activity_user__container">
     <h2 className="graph_titre">Activité quotidienne</h2>
       {minWeight !== null && maxWeight !== null && (
         <BarChart width={800} height={200} data={userActivity}>

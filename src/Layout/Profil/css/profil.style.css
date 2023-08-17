@@ -25,3 +25,37 @@
 .activite_secondary{
     display: flex;
 }
+
+@media (max-width: 1024px) {
+    .acceuil_main-container {
+        padding: 40px 10px;
+    }
+
+    .acceuil_hello {
+        font-size: 36px;
+    }
+
+    .acceuil_message {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .activite_secondary {
+        width: 650px;
+    }
+
+        .recharts-surface {
+            width: 100%;
+        }
+    
+        .recharts-default-legend{
+            width: 80%;
+            font-size: 12px;
+        }
+    
+        .activity_user__container{
+            width: 600px;
+        }
+
+
+}

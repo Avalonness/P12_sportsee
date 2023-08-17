@@ -1,3 +1,15 @@
 .graph_titre{
     font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+    .activity_user__container .recharts-surface {
+        width: 90%;
+    }
+
+    .activity_user__container .recharts-default-legend {
+        width: 80%;
+    }
+
+
+}

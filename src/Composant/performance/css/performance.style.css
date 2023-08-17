@@ -8,3 +8,9 @@
     justify-content: center;
     margin-right: 25px;
 }
+
+@media (max-width: 1024px) {
+    .graph_perf__container{
+        width: 25%;   
+    }
+}
