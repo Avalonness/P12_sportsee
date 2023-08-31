@@ -68,3 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### API Container fails to minify
+
+Il faut connecter le port de sortie du container 3000 sur le port 8080 pour que l'application fonctionne avec l'API. 
