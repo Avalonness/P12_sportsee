@@ -18,12 +18,15 @@
 
 .acceuil_bottom_content {
     display: flex;
-    justify-content: space-between;
     padding-top: 30px;
 }
 
 .activite_secondary{
     display: flex;
+}
+
+.acceuil_bottom_nutrition{
+    margin-left: 10px;
 }
 
 @media (max-width: 1024px) {
