@@ -2,7 +2,7 @@ import "./css/averageSession.style.css"
 
 import React, { useState, useEffect } from 'react';
 import fetchUserAverageSessions from '../../Shares/services/mockAverageSession';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend} from 'recharts';
 
 import AverageModel from '../../Shares/models/AverageModel';
 
@@ -60,20 +60,22 @@ function AverageSession({ userId }) {
         return null;
       }
     
+      const sIndex = averageSessions.findIndex(session => session.day === 'S');
+      const dIndex = averageSessions.findIndex(session => session.day === 'D');
 
       return (
         <div className='graph_average__container'>
-            <LineChart width={200} height={200} data={averageSessions} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <LineChart width={200} height={200} data={averageSessions} margin={{ top: 20, right: 0, left: 0, bottom: 5 }}>
                 <XAxis dataKey="day" tick={{ fill: '#FFFFFF' }} axisLine={false} />
                 <YAxis hide/>
                 <Tooltip content={<CustomTooltip />} />
-                <Legend align="center" verticalAlign="top" height={36} />
+                <Legend align="center" verticalAlign="top" height={36} />            
                 <Line 
                     type="monotone"
                     dataKey="sessionLength"
                     name="Durée moyenne des sessions"
                     stroke="#FFFFFF" 
-                    activeDot={{ r: 8, stroke: '#FFFFFF' }}
+                    dot={false}
                 />
             </LineChart>
         </div>
