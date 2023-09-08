@@ -84,7 +84,7 @@ function AverageSession({ userId }) {
 
       return (
         <div className='graph_average__container'>
-            <LineChart width={200} height={200} data={averageSessions} margin={{ top: 20, right: 0, left: 0, bottom: 5 }}>
+            <LineChart width={200} height={200} data={averageSessions} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
                 <XAxis dataKey="day" tick={{ fill: '#FFFFFF' }} axisLine={false} />
                 <YAxis hide/>
                 <Tooltip content={<CustomTooltip />} />
