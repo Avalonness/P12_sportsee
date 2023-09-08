@@ -29,7 +29,6 @@ function ProfilLayout() {
           userData.keyData
         ));
       } else {
-        // Use the new mockUserService to get data from mockData
         const mockUser = getMockUserDataById(id);
         setUser(mockUser);
       }

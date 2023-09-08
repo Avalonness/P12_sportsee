@@ -1,6 +1,7 @@
 import "./css/userActivity.style.css"
 import React, { useState, useEffect } from 'react';
-import { fetchUserActivity, getUserActivityById } from '../../Shares/services/mockerUserActivity';
+import fetchUserActivity from '../../Shares/services/mockerUserActivity';
+import { getUserActivityById } from '../../Shares/services/mockerUserActivity';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ActivityModel from '../../Shares/models/ActivityModel';
 
@@ -8,48 +9,43 @@ function UserActivity({ userId }) {
   const [userActivity, setUserActivity] = useState(null);
   const [minWeight, setMinWeight] = useState(null);
   const [maxWeight, setMaxWeight] = useState(null);
-  const DEV_MODE = false;
+  
 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-      let activityData = null;
-      
-      if (!DEV_MODE) {
-        try {
-          // Essaye d'abord d'appeler l'API si pas mode de DEV.
-          activityData = await fetchUserActivity(userId);
-        } catch (error) {
-          console.error("Erreur lors de l'appel de l'API", error);
+      try {
+        const activityData = await fetchUserActivity(userId);
+
+        if (activityData && activityData.data) {
+          const activitySessions = activityData.data.sessions.map(session => ({
+            ...session,
+            day: session.day.split('-')[2] // Pour extraire le jour
+          }));
+          setUserActivity(activitySessions);
+          calculateWeightRange(activitySessions);
+          return; // Ajout du return ici pour éviter d'utiliser le mock
         }
+      } catch (error) {
+        console.error(error);
       }
 
-      // Si mode DEV ou que l'appel API a échoué, utilise les données mockées.
-      if (DEV_MODE || !activityData || !activityData.data) {
-        console.log("PROUT PROUT")
-        const mockUserActivity = getUserActivityById(userId);
-        if (mockUserActivity) {
-          activityData = mockUserActivity;
-        } else {
-          console.error('Données d\'activité non disponibles');
-          return;
-        }
-      }
+      // Si l'appel API échoue ou si les données ne sont pas disponibles,
+      const mockUserActivity = getUserActivityById(userId);
 
-      if (activityData && activityData.data && activityData.data.sessions) {
-        const activitySessions = activityData.data.sessions.map(session => ({
+      if (mockUserActivity) {
+        const activitySessions = mockUserActivity.sessions.map(session => ({
           ...session,
-          day: session.day.split('-')[2]
+          day: session.day.split('-')[2]  // Pour extraire le jour
         }));
         setUserActivity(activitySessions);
         calculateWeightRange(activitySessions);
       } else {
-        console.error('activityData ou activityData.data ou activityData.data.sessions est undefined');
+        console.error('Données d\'activité non disponibles');
       }
     };
 
     fetchData();
   }, [userId]);
-
   const calculateWeightRange = (activitySessions) => {
     const weightValues = activitySessions.map(session => session.kilogram);
     setMinWeight(Math.min(...weightValues));
@@ -60,10 +56,6 @@ function UserActivity({ userId }) {
   if (!userActivity || minWeight === null || maxWeight === null) {
     return <div>Loading...</div>;
   }
-
-  const extractDay = (dateString) => {
-    return dateString.split('-')[2];
-}
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {

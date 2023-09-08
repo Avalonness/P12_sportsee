@@ -1,15 +1,30 @@
 import "./css/performance.style.css"
 import React, { useState, useEffect } from 'react';
-import fetchUserPerformance from "../../Shares/services/mockPerformance";
+import { fetchPerformanceFromAPI, fetchPerformanceFromMock } from "../../Shares/services/mockPerformance";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis} from 'recharts';
 
 
 function UserPerformance({ userId }) {
   const [performanceData, setPerformanceData] = useState({ performanceDataModels: [], kindElementModels: [] });
 
+
   useEffect(() => {
     async function fetchPerformance() {
-      const fetchedPerformanceData = await fetchUserPerformance(userId);
+      let fetchedPerformanceData;
+
+      try {
+        // Essaye d'abord de récupérer les données depuis l'API
+        fetchedPerformanceData = await fetchPerformanceFromAPI(userId);
+      } catch (error) {
+        console.error(error);
+      }
+
+      // Si les données n'ont pas pu être récupérées depuis l'API ou s'il y a une erreur,
+      // utilisez les données du mock
+      if (!fetchedPerformanceData) {
+        fetchedPerformanceData = fetchPerformanceFromMock(userId);
+      }
+
       setPerformanceData(fetchedPerformanceData);
     }
     fetchPerformance();
