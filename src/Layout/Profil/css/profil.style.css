@@ -18,7 +18,7 @@
 
 .acceuil_bottom_content {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 30px;
 }
 
