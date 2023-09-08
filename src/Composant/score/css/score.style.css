@@ -3,6 +3,10 @@
     border-radius: 5px;
 }
 
+.score-container li {
+    padding: 5px;
+}
+
 @media (max-width: 1024px) {
     .score-container{
         width: 30%;

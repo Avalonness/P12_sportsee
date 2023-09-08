@@ -44,6 +44,7 @@ function ScoreComponent({ score }) {
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
+          cornerRadius={10}
         >
           {
             data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
