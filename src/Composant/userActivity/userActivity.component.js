@@ -1,7 +1,6 @@
 import "./css/userActivity.style.css"
 import React, { useState, useEffect } from 'react';
-import fetchUserActivity from '../../Shares/services/mockerUserActivity';
-import { getUserActivityById } from '../../Shares/services/mockerUserActivity';
+import { fetchUserActivity, getUserActivityById } from '../../Shares/services/mockerUserActivity';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ActivityModel from '../../Shares/models/ActivityModel';
 
@@ -9,44 +8,42 @@ function UserActivity({ userId }) {
   const [userActivity, setUserActivity] = useState(null);
   const [minWeight, setMinWeight] = useState(null);
   const [maxWeight, setMaxWeight] = useState(null);
+  const DEV_MODE = false;
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
-      try {
-        const activityData = await fetchUserActivity(userId);
-        if (activityData && activityData.data) {
-          const activitySessions = activityData.data.sessions.map(session => ({
-            ...session,
-            day: session.day.split('-')[2]  // Pour extraire le jour
-          }));
-          setUserActivity(activitySessions);
-          calculateWeightRange(activitySessions);
-        } else {
-          const mockUserActivity = getUserActivityById(userId);
-          if (mockUserActivity) {
-            const activitySessions = mockUserActivity.sessions.map(session => ({
-              ...session,
-              day: session.day.split('-')[2]  // Pour extraire le jour
-            }));
-            setUserActivity(activitySessions);
-            calculateWeightRange(activitySessions);
-          } else {
-            console.error('Données d\'activité non disponibles');
-          }
+      let activityData = null;
+      
+      if (!DEV_MODE) {
+        try {
+          // Essaye d'abord d'appeler l'API si pas mode de DEV.
+          activityData = await fetchUserActivity(userId);
+        } catch (error) {
+          console.error("Erreur lors de l'appel de l'API", error);
         }
-      } catch (error) {
-        console.error(error);
+      }
+
+      // Si mode DEV ou que l'appel API a échoué, utilise les données mockées.
+      if (DEV_MODE || !activityData || !activityData.data) {
+        console.log("PROUT PROUT")
         const mockUserActivity = getUserActivityById(userId);
         if (mockUserActivity) {
-          const activitySessions = mockUserActivity.sessions.map(session => ({
-            ...session,
-            day: session.day.split('-')[2]  // Pour extraire le jour
-          }));
-          setUserActivity(activitySessions);
-          calculateWeightRange(activitySessions);
+          activityData = mockUserActivity;
         } else {
           console.error('Données d\'activité non disponibles');
+          return;
         }
+      }
+
+      if (activityData && activityData.data && activityData.data.sessions) {
+        const activitySessions = activityData.data.sessions.map(session => ({
+          ...session,
+          day: session.day.split('-')[2]
+        }));
+        setUserActivity(activitySessions);
+        calculateWeightRange(activitySessions);
+      } else {
+        console.error('activityData ou activityData.data ou activityData.data.sessions est undefined');
       }
     };
 
