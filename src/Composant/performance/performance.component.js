@@ -39,7 +39,7 @@ function UserPerformance({ userId }) {
 
   return (
     <div className="graph_perf__container">
-      <RadarChart width={300} height={200} data={chartData}>
+      <RadarChart width={300} height={200} data={chartData} margin={{ top: 30, right: 20, bottom: 0, left: 20}}>
         <PolarGrid stroke="#FFFFFF" />
         <PolarAngleAxis dataKey="kind" tick={{ fill: '#FFFFFF' }} fontSize={12} />
         <Radar name="Performance" dataKey="value" stroke="#FF0000" fill="#FF0000" fillOpacity={0.6} />

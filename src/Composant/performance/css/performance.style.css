@@ -1,12 +1,17 @@
 .graph_perf__container{
     background: #282D30;
-    width: 35%;
+    width: 250px;
     height: 200px;
     margin-left: 25px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     margin-right: 25px;
+}
+
+
+.graph_perf__container line {
+  display: none;
 }
 
 @media (max-width: 1024px) {

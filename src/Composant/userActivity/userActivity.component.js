@@ -101,7 +101,7 @@ function CustomLegend() {
       {minWeight !== null && maxWeight !== null && (
         <div className="wrapper_legend">
           <CustomLegend />
-          <BarChart width={800} height={200} data={userActivity}>
+          <BarChart width={650} height={200} data={userActivity}>
             <CartesianGrid strokeDasharray="3 3" vertical={false}/>
             <XAxis dataKey="day" />
             <YAxis yAxisId="left" hide />
