@@ -15,21 +15,19 @@ function UserActivity({ userId }) {
       try {
         const activityData = await fetchUserActivity(userId);
         if (activityData && activityData.data) {
-          const activitySessions = activityData.data.sessions.map(session => new ActivityModel(
-            session.day,
-            session.kilogram,
-            session.calories
-          ));
+          const activitySessions = activityData.data.sessions.map(session => ({
+            ...session,
+            day: session.day.split('-')[2]  // Pour extraire le jour
+          }));
           setUserActivity(activitySessions);
           calculateWeightRange(activitySessions);
         } else {
           const mockUserActivity = getUserActivityById(userId);
           if (mockUserActivity) {
-            const activitySessions = mockUserActivity.sessions.map(session => new ActivityModel(
-              session.day,
-              session.kilogram,
-              session.calories
-            ));
+            const activitySessions = mockUserActivity.sessions.map(session => ({
+              ...session,
+              day: session.day.split('-')[2]  // Pour extraire le jour
+            }));
             setUserActivity(activitySessions);
             calculateWeightRange(activitySessions);
           } else {
@@ -40,11 +38,10 @@ function UserActivity({ userId }) {
         console.error(error);
         const mockUserActivity = getUserActivityById(userId);
         if (mockUserActivity) {
-          const activitySessions = mockUserActivity.sessions.map(session => new ActivityModel(
-            session.day,
-            session.kilogram,
-            session.calories
-          ));
+          const activitySessions = mockUserActivity.sessions.map(session => ({
+            ...session,
+            day: session.day.split('-')[2]  // Pour extraire le jour
+          }));
           setUserActivity(activitySessions);
           calculateWeightRange(activitySessions);
         } else {
@@ -67,20 +64,53 @@ function UserActivity({ userId }) {
     return <div>Loading...</div>;
   }
 
+  const extractDay = (dateString) => {
+    return dateString.split('-')[2];
+}
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="info-kg">{`${payload[0].value}kg`}</p>
+        <p className="info-kcal">{`${payload[1].value}kCal`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
+function CustomLegend() {
+  return (
+    <div style={{ paddingBottom: '40px' }}>
+      <div style={{ display: 'inline-block', marginRight: '10px' }}>
+        <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#282D30', marginRight: '5px' }}></span>
+        Poids (kg)
+      </div>
+      <div style={{ display: 'inline-block' }}>
+        <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#E60000', marginRight: '5px' }}></span>
+        Calories Brûlées (kCal)
+      </div>
+    </div>
+  );
+}
+
   return (
     <div className="activity_user__container">
     <h2 className="graph_titre">Activité quotidienne</h2>
       {minWeight !== null && maxWeight !== null && (
-        <BarChart width={800} height={200} data={userActivity}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis yAxisId="left" hide />
-          <YAxis yAxisId="right" orientation="right" label={{ value: '', angle: -90, position: 'insideRight' }} domain={[minWeight - 1, maxWeight + 1]} />
-          <Tooltip />
-          <Legend align="right" verticalAlign="top" height={36} iconType="square" />
-          <Bar yAxisId="right" dataKey="kilogram" name="Poids (kg)" fill="#282D30" />
-          <Bar yAxisId="left" dataKey="calories" name="Calories Brûlées (kCal)" fill="#E60000" />
-        </BarChart>
+        <div className="wrapper_legend">
+          <CustomLegend />
+          <BarChart width={800} height={200} data={userActivity}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+            <XAxis dataKey="day" />
+            <YAxis yAxisId="left" hide />
+            <YAxis yAxisId="right" orientation="right" label={{ value: '', angle: -90, position: 'insideRight' }} domain={[minWeight - 1, maxWeight + 1]} />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar yAxisId="right" dataKey="kilogram" name="Poids (kg)" fill="#282D30" barSize={10} radius={[10, 10, 0, 0]}/>
+            <Bar yAxisId="left" dataKey="calories" name="Calories Brûlées (kCal)" fill="#E60000" barSize={10} radius={[10, 10, 0, 0]}/>
+          </BarChart>
+        </div>
       )}
     </div>
   );

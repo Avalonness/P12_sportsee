@@ -1,6 +1,43 @@
+.activity_user__container {
+    position: relative;
+}
+
 .graph_titre{
     font-weight: bold;
+    text-align: left;
+    position: absolute;
+    left: 20px;
+    top: 30px;
 }
+
+.activity_user__container{
+    background-color: rgba(229, 228, 226, 0.4);
+    border-radius: 5px;
+    margin-bottom: 25px;
+    padding: 25px;
+}
+
+.custom-tooltip {
+    background-color: #E60000;
+    padding: 15px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .info-kg,
+  .info-kcal {
+    color: #ffffff;
+    margin: 0;   
+    padding: 10px 0; 
+  }
+
+  .info-kg{
+    margin-bottom: 20px;
+  }
+
+  .wrapper_legend{
+    text-align: right;
+  }
 
 @media (max-width: 1024px) {
     .activity_user__container .recharts-surface {
