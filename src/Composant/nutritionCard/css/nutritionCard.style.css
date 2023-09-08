@@ -3,12 +3,13 @@
 }
 .nutrition_container {
     background-color: rgba(229, 228, 226, 0.4);
-    padding: 20px 40px;
+    padding: 25px 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 25px;
+    border-radius: 5px;
 }
 
 .nutrition_content__left{
@@ -19,6 +20,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    padding: 15px;
 }
 .nutrition_content__left img {
     height: 20px;
@@ -27,10 +29,11 @@
 .nutrition_content__right{
     width: 30%;
     height: 60px;
-    margin-right: 15px;
+    margin-right: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 13px;
 }
 
 .nutrition_value{
@@ -67,6 +70,8 @@
 
   }
 
+
+
   .nutrition_container {
     background-color: rgba(229, 228, 226, 0.4);
     padding: 20px 28px;
@@ -79,7 +84,9 @@
   }
 
   .nutrition_content__left{
-    padding: 20px 20px;
+    padding: 5px;
+    height: 50px;
+    width: 50px;
 }
 
 
