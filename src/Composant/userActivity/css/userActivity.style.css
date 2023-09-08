@@ -40,13 +40,8 @@
   }
 
 @media (max-width: 1024px) {
-    .activity_user__container .recharts-surface {
-        width: 90%;
-    }
-
-    .activity_user__container .recharts-default-legend {
-        width: 80%;
-    }
-
+.activity_user__container{
+  width: 650px;
+}
 
 }

@@ -16,6 +16,6 @@
 
 @media (max-width: 1024px) {
     .graph_perf__container{
-        width: 25%;   
+        width: 200px;   
     }
 }

@@ -28,7 +28,7 @@
 
 @media (max-width: 1024px) {
     .acceuil_main-container {
-        padding: 40px 10px;
+        padding: 25px 10px;
     }
 
     .acceuil_hello {
@@ -55,6 +55,11 @@
     
         .activity_user__container{
             width: 600px;
+        }
+
+
+        .acceuil_bottom_content {
+            padding-top: 0px;
         }
 
 
